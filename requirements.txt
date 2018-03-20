@@ -1,0 +1,7 @@
+gTTS==1.2.2
+gTTS-token==1.1.1
+pyTelegramBotAPI==3.6.0
+python-telegram-bot==10.0.1
+urllib3==1.22
+virtualenv==15.1.0
+virtualenv-clone==0.3.0
