@@ -85,7 +85,10 @@ def handle_command(message):
 def handle_command(message):
     user_id = str(message.chat.id)
     check(user_id)
-    bot.send_photo(message.chat.id, ress[user_id].news_image())
+    try:
+        bot.send_photo(message.chat.id, ress[user_id].news_image())
+    except:
+        pass
     answer = ress[user_id].news()
     bot.send_message(message.chat.id, answer, disable_web_page_preview=True)
 
