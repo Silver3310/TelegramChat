@@ -152,8 +152,6 @@ glossary = {
               "ect plan created by someone with no real experience with the task at hand.",
     "kos": "From gaming, it stands for Kill On Site and can also be used to indicate data to be deleted or hardware t"
            "o be retired.",
-    "lmao": "Laughing My A** Off",
-    "lmfao": "Laughing My Freaking A** Off",
     "lol": "Laugh Out Loud",
     "lulz": "Another variant on expressing humor",
     "n00b": "Spelled with zeroes, it indicates a relative newcomer or someone lacking experience.",

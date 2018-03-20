@@ -121,7 +121,7 @@ def handle_text(message):
         answer = ress[user_id].meaning(message.text.lower(), user_id)
         # if it is successful
         if answer not in ress[user_id].apologies:
-            voice = open('D:/Projects/TelegramChat/%s.mp3' % user_id, 'rb')
+            voice = open('%s.mp3' % user_id, 'rb')
             bot.send_audio(message.chat.id, voice)
     else:
         answer = ress[user_id].fail()
