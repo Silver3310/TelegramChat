@@ -24,6 +24,7 @@ class Responder(object):
                    "I think you'll cope with it!", "It's no as easy as it seems :)"]
     congratulations = ["Yeah! You're right ;)", "You're so impeccable!", "Well done", "Great job!"]
     mistakes = ["Oh, try to be more attentive", "Look harder", "No, you're mistaken", "Come on, one more attempt!"]
+    censor = ["fuck", "dick", "whore", "ass", "stupid", "idiot", "suck", "cock", "piss", "shit"]
     newsindex = 0
 
     def __init__(self):
@@ -44,9 +45,13 @@ class Responder(object):
             else:
                 # if there's data
                 answer = data['list'][0]['definition']
-                hit = True
-                # also we are going to pronounce it
-                self.audio(message, id)
+                if not any(check in answer for check in self.censor):
+                    hit = True
+                    # also we are going to pronounce it
+                    self.audio(message, id)
+                else:
+                    hit = False
+                    answer = self.fail()
         else:
             answer = vocabulary.glossary[message]
             hit = True
@@ -160,4 +165,9 @@ class Responder(object):
                  "2) I can search for the latest and interesting news. To see them, type a message " \
                  "/news \n" \
                  "3) I can also play with you, type /play and I'll give you a puzzle ;) \n"
+        return answer
+
+    def about(self):
+        answer = "Porgrammer: Еливанов Алексей\nStickers' designer: Ульяна Казакова\nNews API: https://newsapi.org/\n" \
+                 "Created for Проспект Свободный 2018 Conference\nAll Rights Reserved\nKransoyarsk, 2018"
         return answer

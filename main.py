@@ -6,6 +6,8 @@ import constants
 import responder
 # Updater and CommandHandler
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
+# The library to work with files
+import os
 
 
 # creation of the bot
@@ -68,6 +70,7 @@ def handle_command(message):
     user_id = str(message.chat.id)
     check(user_id)
     answer = ress[user_id].start(message.from_user.first_name)
+    bot.send_sticker(message.chat.id, "CAADAgADBwADK9-aIIfaTEnU0I1uAg")
     bot.send_message(message.chat.id, answer)
 
 
@@ -77,7 +80,18 @@ def handle_command(message):
     user_id = str(message.chat.id)
     check(user_id)
     answer = ress[user_id].help()
+    bot.send_sticker(message.chat.id, "CAADAgADBQADK9-aIBeh6MhJuNJPAg")
     bot.send_message(message.chat.id, answer)
+
+
+# command about
+@bot.message_handler(commands=['about'])
+def handle_command(message):
+    user_id = str(message.chat.id)
+    check(user_id)
+    answer = ress[user_id].about()
+    bot.send_sticker(message.chat.id, "CAADAgADBAADK9-aIIlK2r-CusvpAg")
+    bot.send_message(message.chat.id, answer, disable_web_page_preview=True)
 
 
 # alternative command for news
@@ -106,6 +120,7 @@ def handle_command(message):
     button3 = telebot.types.InlineKeyboardButton(text="3", callback_data="3")
     button4 = telebot.types.InlineKeyboardButton(text="4", callback_data="4")
     keyboard.add(button1, button2, button3, button4)
+    bot.send_sticker(message.chat.id, "CAADAgADCQADK9-aIPx3dg9Siip_Ag")
     bot.send_message(message.chat.id, answer, reply_markup=keyboard)
 
 
@@ -117,6 +132,7 @@ def handle_text(message):
     greetings = ["hi", "hello", "what's up", "hola", "privet", "bonjour", "hey", "good morning", "good afternoon", "good evening"]
     if message.text.lower() in greetings:
         answer = ress[user_id].greeting(format(message.from_user.first_name))
+        bot.send_sticker(message.chat.id, "CAADAgADBwADK9-aIIfaTEnU0I1uAg")
     elif ress[user_id].previous_action == "game":
         answer = ress[user_id].game_result(message.text)
     elif is_english(message.text):
@@ -126,6 +142,8 @@ def handle_text(message):
         if answer not in ress[user_id].apologies:
             voice = open('%s.mp3' % user_id, 'rb')
             bot.send_audio(message.chat.id, voice)
+            voice.close()
+            os.remove('%s.mp3' % user_id)
     else:
         answer = ress[user_id].fail()
     # when we finish our manipulations, we can send a message
